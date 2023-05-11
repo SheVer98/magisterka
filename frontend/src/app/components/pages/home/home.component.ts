@@ -10,13 +10,9 @@ import { Car } from 'src/app/shared/models/Car';
 })
 export class HomeComponent implements OnInit  {
 
-  cars:Car[]=[];
-  constructor(private carService:CarService,activatedRoute:ActivatedRoute){
-    activatedRoute.params.subscribe((params)=>{
-      if(params.searchTerm)
-      this.cars=this.carService.getAllCarsBySearchTerm(params.searchTerm);
-    });
-    this.cars=carService.getAll();
+
+  constructor(){
+
   }
 
   ngOnInit(): void {

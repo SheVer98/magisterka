@@ -21,8 +21,11 @@ ngOnInit(): void {
 
 }
 search(term:string):void{
+
   if(term)
-  this.router.navigateByUrl('/search/'+term);
+  this.router.navigateByUrl('/lista/'+term);
+  if (term=="")
+  this.router.navigateByUrl('lista/');
 }
 
 }

@@ -1,0 +1,416 @@
+<app-header></app-header>
+<div class="form">
+  <h1>Wybór samochodu</h1>
+  <form (ngSubmit)="wybierz()" #myForm="ngForm">
+    <label for="cena">Cena (zl):</label>
+    <input type="number" id="cena" name="cena" min="3" max="100000" ngModel required cena><br>
+
+    <label for="moc">Moc (KM):</label>
+    <input type="number" id="moc" name="moc" min="3" max="300" ngModel required moc><br>
+
+    <label for="pojemnosc">Pojemnosc (cm3):</label>
+    <input type="number" id="pojemnosc" name="pojemnosc" min="3" max="4000" ngModel required pojemnosc><br>
+
+    <label for="przebieg">Przebieg (tys. km):</label>
+    <input type="number" id="przebieg" name="przebieg" min="3" max="400" ngModel required przebieg><br>
+
+    <label for="fuelType">Rodzaj paliwa:</label>
+    <select name="fuelType" [(ngModel)]="fuelType">
+      <option value="">-- Wybierz --</option>
+      <option value="Benzyna">Benzyna</option>
+      <option value="Diesel">Diesel</option>
+    </select>
+
+    <label for="gearboxType">Rodzaj skrzyni biegów:</label>
+    <select name="gearboxType" [(ngModel)]="gearboxType">
+      <option value="">-- Wybierz --</option>
+      <option value="Manualna">Manualna</option>
+      <option value="Automatyczna">Automatyczna</option>
+    </select>
+
+    <button (click)="showDetails = true" type="submit" value="Submit" id="btn">Szukaj</button>
+    <!-- <input type="submit" value="Submit" id="btn"> -->
+  </form>
+  <button (click)="showDetails2 = !showDetails2">
+    {{ showDetails2 ? 'Ukryj szczegóły' : 'Pokaż szczegóły' }}
+    </button>
+</div>
+
+<ul *ngIf="showDetails">
+<li>centroid: <b>{{centroid.toFixed(3)}}</b></li>
+</ul>
+
+<div *ngIf="showDetails2">
+  <ul>
+  <h3>dla podanych danych</h3>
+  <ul class="horizontal">
+  <ul class="horizontal">
+ <li>niskacena: <b>{{niskaCena}}</b></li>
+ <li>sredniacena: <b>{{sredniaCena}}</b></li>
+ <li>wysokacena: <b>{{wysokaCena}}</b></li>
+ <li>bardzowysokacena: <b>{{bardzowysokaCena}}</b></li>
+ <li>slabaMoc: <b>{{slabaMoc}}</b></li>
+ <li>sredniamoc: <b>{{sredniaMoc}}</b></li>
+ <li>wysokamoc: <b>{{wysokaMoc}}</b></li>
+ <li>malapojemnosc: <b>{{malaPojemnosc}}</b></li>
+ <li>duzapojemnosc: <b>{{duzaPojemnosc}}</b></li>
+ <li>niskiprzebieg: <b>{{niskiPrzebieg}}</b></li>
+ <li>sredniPrzebieg: <b>{{sredniPrzebieg}}</b></li>
+ <li>wysokiPrzebieg: <b>{{wysokiPrzebieg}}</b></li>
+</ul>
+<ul class="horizontal">
+<li>niskaocena: <b>{{maxniska}}</b></li>
+<li>sredniaocena: <b>{{maxsrednia}}</b></li>
+<li>wysokaocena: <b>{{maxwysoka}}</b></li>
+</ul>
+</ul>
+</ul>
+
+
+  <h3>suma</h3>
+  <ul>
+  <li *ngFor="let samochod of wybraneSuma.slice(0, 4)">
+    <!-- <p>{{samochod.napis}}</p> -->
+<div class="content">
+  <div class="up">
+    <ul>
+<li>niskaocena: <b>{{samochod.niskaocena}}</b></li>
+<li>sredniaocena: <b>{{samochod.sredniaocena}}</b></li>
+<li>wysokaocena: <b>{{samochod.wysokaocena}}</b></li>
+<li>suma: <b>{{samochod.suma.toFixed(3)}}</b></li>
+<li>centroid: <b>{{samochod.centroid.toFixed(3)}}</b></li>
+</ul>
+</div>
+<div class="down">
+  <ul>
+<li>sumacentroid: <b>{{samochod.sumacentroid.toFixed(3)}}</b></li>
+<li>model: <b>{{samochod.model}}</b></li>
+</ul>
+</div>
+</div>
+</li>
+</ul>
+<h3>sumacentroid</h3>
+<ul>
+<li *ngFor="let samochod of wybraneSumaCentroid.slice(0, 4)">
+  <!-- <p>{{samochod.napis}}</p> -->
+<div class="content">
+<div class="up">
+  <ul>
+<li>niskaocena: <b>{{samochod.niskaocena}}</b></li>
+<li>sredniaocena: <b>{{samochod.sredniaocena}}</b></li>
+<li>wysokaocena: <b>{{samochod.wysokaocena}}</b></li>
+<li>suma: <b>{{samochod.suma.toFixed(3)}}</b></li>
+<li>centroid: <b>{{samochod.centroid.toFixed(3)}}</b></li>
+</ul>
+</div>
+<div class="down">
+<ul>
+<li>sumacentroid: <b>{{samochod.sumacentroid.toFixed(3)}}</b></li>
+<li>model: <b>{{samochod.model}}</b></li>
+</ul>
+</div>
+</div>
+</li>
+  </ul>
+  </div>
+
+  <div *ngIf="showDetails">
+
+  <h3>suma</h3>
+
+  <ul>
+  <li *ngFor="let samochod of wybraneSuma.slice(0, 4); let i = index">
+    <p>{{i + 1}}.</p>
+    <div class="samochod">
+      <a routerLink="/car/{{samochod.id}}">
+      <img [src]="samochod.link" [alt]="samochod.model"/>
+    </a>
+      <div class="content">
+<div class="up">
+        <ul>
+<li>
+  <div class="model">
+ <p>Model</p>
+    {{samochod.model}}
+</div>
+</li>
+<li>
+  <div class="cena">
+    <p>Cena (zl)</p>
+  {{samochod.cena}}
+</div>
+</li>
+<li>
+  <div class="moc">
+    <p>Moc (KM)</p>
+  {{samochod.moc}}
+</div>
+</li>
+<li>
+  <div class="pojemnosc">
+    <p>Pojemnosc (cm3)</p>
+  {{samochod.pojemnosc}}
+</div>
+</li>
+<li>
+  <div class="przebieg">
+    <p>Przebieg (tys. km)</p>
+  {{samochod.przebieg}}
+</div>
+</li>
+</ul>
+</div>
+<div class="down">
+<ul>
+<li>
+  <div class="rok">
+    <p>Rok</p>
+  {{samochod.rok}}
+</div>
+</li>
+<li>
+  <div class="paliwo">
+    <p>Paliwo</p>
+  {{samochod.paliwo}}
+</div>
+</li>
+<li>
+  <div class="skrzynia">
+    <p>Skrzynia</p>
+  {{samochod.skrzynia}}
+</div>
+</li>
+<li>
+  <div class="suma">
+    <p>Suma</p>
+  {{samochod.suma.toFixed(3)}}
+</div>
+</li>
+<li>
+  <div class="centroid">
+    <p>centroid</p>
+  {{samochod.centroid.toFixed(3)}}
+</div>
+</li>
+<li>
+  <div class="sumacentroid">
+    <p>sumacentroid</p>
+  {{samochod.sumacentroid.toFixed(3)}}
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+  </li>
+</ul>
+
+
+  <h3>sumacentroid</h3>
+
+
+<ul>
+  <li *ngFor="let samochod of wybraneSumaCentroid.slice(0, 4);let i = index">
+    <p>{{i + 1}}.</p>
+    <div class="samochod">
+      <a routerLink="/car/{{samochod.id}}">
+      <img [src]="samochod.link" [alt]="samochod.model"/>
+    </a>
+      <div class="content">
+<div class="up">
+        <ul>
+<li>
+  <div class="model">
+ <p>Model</p>
+    {{samochod.model}}
+</div>
+</li>
+<li>
+  <div class="cena">
+    <p>Cena (zl)</p>
+  {{samochod.cena}}
+</div>
+</li>
+<li>
+  <div class="moc">
+    <p>Moc (KM)</p>
+  {{samochod.moc}}
+</div>
+</li>
+<li>
+  <div class="pojemnosc">
+    <p>Pojemnosc (cm3)</p>
+  {{samochod.pojemnosc}}
+</div>
+</li>
+<li>
+  <div class="przebieg">
+    <p>Przebieg (tys. km)</p>
+  {{samochod.przebieg}}
+</div>
+</li>
+</ul>
+</div>
+<div class="down">
+<ul>
+<li>
+  <div class="rok">
+    <p>Rok</p>
+  {{samochod.rok}}
+</div>
+</li>
+<li>
+  <div class="paliwo">
+    <p>Paliwo</p>
+  {{samochod.paliwo}}
+</div>
+</li>
+<li>
+  <div class="skrzynia">
+    <p>Skrzynia</p>
+  {{samochod.skrzynia}}
+</div>
+</li>
+<li>
+  <div class="suma">
+    <p>Suma</p>
+  {{samochod.suma.toFixed(3)}}
+</div>
+</li>
+<li>
+  <div class="centroid">
+    <p>centroid</p>
+  {{samochod.centroid.toFixed(3)}}
+</div>
+</li>
+<li>
+  <div class="sumacentroid">
+    <p>sumacentroid</p>
+  {{samochod.sumacentroid.toFixed(3)}}
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+  </li>
+</ul>
+
+</div>
+
+<!-- <ul>
+  <h3>najlepszy samochod wg sumy</h3>
+<li>
+  <div class="samochody">
+<img [src]="wybrane[0].link" [alt]="wybrane[0].model"/>
+<div class="content">
+  <div class="up">
+
+    <ul>
+<li>maxniska: <b>{{wybrane[0].niskaocena}}</b></li>
+<li>maxsrednia: <b>{{wybrane[0].sredniaocena}}</b></li>
+<li>maxwysoka: <b>{{wybrane[0].wysokaocena}}</b></li>
+<li>suma: <b>{{wybrane[0].suma}}</b></li>
+<li>centroid: <b>{{wybrane[0].centroid}}</b></li>
+</ul>
+</div>
+<div class="down">
+  <ul>
+<li>sumacentroid: <b>{{wybrane[0].sumacentroid}}</b></li>
+
+<li>model: <b>{{wybrane[0].model}}</b></li>
+<li>cena: <b>{{wybrane[0].cena}}</b></li>
+<li>moc: <b>{{wybrane[0].moc}}</b></li>
+<li>pojemnosc: <b>{{wybrane[0].pojemnosc}}</b></li>
+<li>przebieg: <b>{{wybrane[0].przebieg}}</b></li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<h3>drugi najlepszy samochod wg sumy</h3>
+<li>
+<div class="samochody">
+<img [src]="wybrane[1].link" [alt]="wybrane[1].model"/>
+<div class="content">
+  <div class="up">
+    <ul>
+  <li>maxniska: <b>{{wybrane[1].niskaocena}}</b></li>
+  <li>maxsrednia: <b>{{wybrane[1].sredniaocena}}</b></li>
+  <li>maxwysoka: <b>{{wybrane[1].wysokaocena}}</b></li>
+  <li>suma: <b>{{wybrane[1].suma}}</b></li>
+  <li>centroid: <b>{{wybrane[1].centroid}}</b></li>
+</ul>
+</div>
+<div class="down">
+  <ul>
+  <li>sumacentroid: <b>{{wybrane[1].sumacentroid}}</b></li>
+
+<li>model: <b>{{wybrane[1].model}}</b></li>
+  <li>cena: <b>{{wybrane[1].cena}}</b></li>
+  <li>moc: <b>{{wybrane[1].moc}}</b></li>
+  <li>pojemnosc: <b>{{wybrane[1].pojemnosc}}</b></li>
+  <li>przebieg: <b>{{wybrane[1].przebieg}}</b></li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+
+  <h3> najlepszy samochod wg centroidu</h3>
+  <li>
+  <div class="samochody">
+  <img [src]="wybrane[2].link" [alt]="wybrane[2].model"/>
+  <div class="content">
+    <div class="up">
+      <ul>
+  <li>maxniska: <b>{{wybrane[2].niskaocena}}</b></li>
+  <li>maxsrednia: <b>{{wybrane[2].sredniaocena}}</b></li>
+  <li>maxwysoka: <b>{{wybrane[2].wysokaocena}}</b></li>
+  <li>suma: <b>{{wybrane[2].suma}}</b></li>
+  <li>centroid: <b>{{wybrane[2].centroid}}</b></li>
+  <li>sumacentroid: <b>{{wybrane[2].sumacentroid}}</b></li>
+</ul>
+</div>
+<div class="down">
+  <ul>
+<li>model: <b>{{wybrane[2].model}}</b></li>
+  <li>cena: <b>{{wybrane[2].cena}}</b></li>
+  <li>moc: <b>{{wybrane[2].moc}}</b></li>
+  <li>pojemnosc: <b>{{wybrane[2].pojemnosc}}</b></li>
+  <li>przebieg: <b>{{wybrane[2].przebieg}}</b></li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+
+  <h3> drugi najlepszy samochod wg centroidu</h3>
+  <li>
+  <div class="samochody">
+  <img [src]="wybrane[3].link" [alt]="wybrane[3].model"/>
+  <div class="content">
+    <div class="up">
+      <ul>
+    <li>maxniska: <b>{{wybrane[3].niskaocena}}</b></li>
+    <li>maxsrednia: <b>{{wybrane[3].sredniaocena}}</b></li>
+    <li>maxwysoka: <b>{{wybrane[3].wysokaocena}}</b></li>
+    <li>suma: <b>{{wybrane[3].suma}}</b></li>
+    <li>centroid: <b>{{wybrane[3].centroid}}</b></li>
+    <li>sumacentroid: <b>{{wybrane[3].sumacentroid}}</b></li>
+  </ul>
+</div>
+<div class="down">
+  <ul>
+  <li>model: <b>{{wybrane[3].model}}</b></li>
+    <li>cena: <b>{{wybrane[3].cena}}</b></li>
+    <li>moc: <b>{{wybrane[3].moc}}</b></li>
+    <li>pojemnosc: <b>{{wybrane[3].pojemnosc}}</b></li>
+    <li>przebieg: <b>{{wybrane[3].przebieg}}</b></li>
+  </ul>
+</div>
+</div>
+</div>
+</li>
+  </ul> -->

@@ -240,7 +240,7 @@ export const cars:Car[]=[
   rok:	2007,
   paliwo:	  "Benzyna",
   skrzynia:	  "Manualna",
-  link:	  'https://ireland.apollo.olxcdn.com/v1/files/eyJmbiI6InV2ODUzZnQwcGhvdTEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJwIjoiMTAsLTEwIiwiYSI6IjAifV19.fLzMrS7jY5c9tMRWRFCTnAzUam3LBdS1gYzn0K32Lfg/image;s=1080x720 ',
+  link:	  'https://bi.im-g.pl/im/5/7602/z7602055Q,Mercedes-klasy-C--W203-.jpg ',
 
 },
 
